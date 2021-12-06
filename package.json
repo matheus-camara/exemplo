@@ -1,0 +1,25 @@
+{
+  "name": "exemplo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "preinstall": "dotnet tool restore"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^7.0.4"
+  },
+  "dependencies": {
+    "lint-staged": "^12.1.2"
+  },
+  "lint-staged": {
+    "*.cs": "dotnet format --include"
+  }
+}
