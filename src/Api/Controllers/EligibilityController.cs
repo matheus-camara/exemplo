@@ -11,9 +11,7 @@ namespace Api.Controllers
         private readonly IMediator _mediator;
 
         public EligibilityController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+            => _mediator = mediator;
 
         [HttpPost]
         public async Task<IActionResult> CalculateEligiblityForPro([FromBody] CalculateEligibilityForProCommand command)
