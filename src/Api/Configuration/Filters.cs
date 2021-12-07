@@ -10,5 +10,8 @@ public static class Filters
     {
         options.Filters.Add(typeof(CustomNotificationFilter));
         options.Filters.Add(typeof(TransactionFilter));
+        options.Filters.Add(typeof(NotFoundFilter));
+        options.Filters.Add(typeof(NoContentFilter));
+        options.Filters.Add(typeof(ExceptionFilter));
     }
 }

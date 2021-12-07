@@ -13,9 +13,13 @@ public static class Migrations
         {
             if (context.Database.IsRelational() && context.Database.CanConnect())
             {
+
                 context.Database.OpenConnection();
-                context.ApplySeeds();
-                context.Database.Migrate();
+                if (!context.Database.GetAppliedMigrations().Any())
+                {
+                    context.Database.Migrate();
+                    context.ApplySeeds();
+                }
                 context.Database.CloseConnection();
             }
         }

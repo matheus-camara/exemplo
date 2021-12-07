@@ -12,7 +12,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__Main=Server=Db;Database=db;User Id=sa;Password=ExemploDotnet500@
+      - ConnectionStrings__Main=Server=Db;Database=master;User Id=sa;Password=ExemploDotnet500@
     ports:
       - '5000:80'
     networks:

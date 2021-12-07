@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20211122185222_first")]
+    [Migration("20211206223500_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,32 +74,6 @@ namespace Infra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Project", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("0e6faf34-8fa0-4efe-94db-c5fe1171c587"),
-                            MinimumScore = 10,
-                            Name = "Calculate the Dark Matter of the universe for Nasa"
-                        },
-                        new
-                        {
-                            Id = new Guid("5ff11d56-9b9d-4e9f-9be1-90609fc426ee"),
-                            MinimumScore = 5,
-                            Name = "Determine if the Schrodinger's cat is alive"
-                        },
-                        new
-                        {
-                            Id = new Guid("15c03f0a-0cf5-4da3-a662-446c76d095b5"),
-                            MinimumScore = 3,
-                            Name = "Attend to users support for a YXZ Company"
-                        },
-                        new
-                        {
-                            Id = new Guid("873f4ece-db97-4a63-8e8f-1712e9659b60"),
-                            MinimumScore = 2,
-                            Name = "Collect specific people information from their social media for XPTO Company"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Pros.Pro", b =>
@@ -187,13 +161,6 @@ namespace Infra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ReferralCode", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("3811e1db-55ae-48f9-a220-427cf1ae1b0d"),
-                            Code = "token1234"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Eligibilities.Eligibility", b =>
