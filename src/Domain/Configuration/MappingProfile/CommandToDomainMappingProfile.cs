@@ -10,12 +10,11 @@ namespace Domain.Configuration.MappingProfile
     {
         public CommandToDomainMappingProfile()
         {
-            SourceMemberNamingConvention = new PascalCaseNamingConvention();
-            DestinationMemberNamingConvention = new PascalCaseNamingConvention();
-
             CreateMap<InternetTestCommand, InternetTest>();
             CreateMap<PastExperiencesCommand, PastExperiences>();
-            CreateMap<string, EducationLevel>().ConvertUsing(x => x.GetEducationLevel());
+            CreateMap<string, EducationLevel>()
+                .ConvertUsing(x => x.GetEducationLevel());
+
             CreateMap<CalculateEligibilityForProCommand, Pro>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ForMember(x => x.Score, opt => opt.Ignore())

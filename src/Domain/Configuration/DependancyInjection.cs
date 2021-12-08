@@ -19,7 +19,7 @@ namespace Domain.Configuration
 
         public static void AddMappers(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(DomainToCommandMappingProfile), typeof(CommandToDomainMappingProfile));
+            services.AddAutoMapper(typeof(DomainToCommandMappingProfile), typeof(CommandToDomainMappingProfile), typeof(GlobalProfile));
         }
     }
 }
