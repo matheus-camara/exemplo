@@ -103,8 +103,9 @@ public class CalculateEligibilityForProTest : IClassFixture<WebApplicationFactor
 
         response.StatusCode.Should().Be(HttpStatusCode.UnprocessableEntity);
         responseJson.Should()
-            .BeEquivalentTo("Education Level must be one of 'no_education, high_school, bachelors_or_higher'",
-                "'Writing Score' deve ser informado.", "'Download Speed' deve ser informado.",
-                "'Past Experiences' não pode ser nulo.");
+            .BeEquivalentTo(
+                "Education Level must be one of 'no_education, high_school, bachelors_or_higher'",
+                "'Writing Score' must not be empty.", "'Download Speed' must not be empty.",
+                "'Past Experiences' must not be empty.");
     }
 }

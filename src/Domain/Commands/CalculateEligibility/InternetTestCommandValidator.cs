@@ -2,7 +2,7 @@
 
 namespace Domain.Commands.CalculateEligibility;
 
-public class InternetTestCommandValidator : AbstractValidator<InternetTestCommand>
+public class InternetTestCommandValidator : AbstractValidator<InternetTestCommand?>
 {
     public InternetTestCommandValidator()
     {

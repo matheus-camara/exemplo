@@ -13,6 +13,8 @@ public class CalculateEligibilityForProCommandValidatorTest
     public void ShouldPassValidationWithValidData()
     {
         var command = DataGenerator.CalculateEligibilityForProCommand.Generate();
-        _validator.Validate(command).ShouldNotHaveValidationError();
+        var result = _validator.Validate(command);
+        result.Errors.Should().BeEmpty();
+        result.ShouldNotHaveValidationError();
     }
 }

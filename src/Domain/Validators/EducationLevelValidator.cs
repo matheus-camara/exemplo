@@ -14,7 +14,7 @@ public static class EducationLevelValidator
 
     private static readonly string Message = MessageTemplate.Replace(Placeholder, EducationLevelOptions);
 
-    public static IRuleBuilderOptions<T, string> IsValidEducationLevel<T>(this IRuleBuilder<T, string> ruleBuilder)
+    public static IRuleBuilderOptions<T, string?> IsValidEducationLevel<T>(this IRuleBuilder<T, string?> ruleBuilder)
     {
         return ruleBuilder.Must(x => x.GetEducationLevel() is not 0).WithMessage(Message);
     }

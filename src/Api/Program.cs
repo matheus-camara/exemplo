@@ -1,4 +1,5 @@
 using Api.Configuration;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
@@ -14,6 +15,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options => { options.SuppressMode
 builder.Services.AddControllers(Filters.AddFilters).AddJsonConfiguration();
 
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" }); });
+
+ValidatorOptions.Global.LanguageManager.Enabled = false;
 
 var app = builder.Build();
 

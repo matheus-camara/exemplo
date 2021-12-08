@@ -2,7 +2,7 @@
 
 namespace Domain.Commands.CalculateEligibility;
 
-public class PastExperiencesCommandValidator : AbstractValidator<PastExperiencesCommand>
+public class PastExperiencesCommandValidator : AbstractValidator<PastExperiencesCommand?>
 {
     public PastExperiencesCommandValidator()
     {
