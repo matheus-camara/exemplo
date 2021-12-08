@@ -9,11 +9,17 @@ namespace Infra.Seeds
         {
             new ReferralCodeEntity
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("cc7d3952-da72-4536-9542-e79d803954e7"),
                 Code = "token1234"
             },
         };
 
-        internal static void AddReferralCodeSeed(this Context that) => that.AddRange(Data);
+        internal static void AddReferralCodeSeed(this Context that)
+        {
+            foreach (var code in Data)
+            {
+                if (!that.Set<ReferralCodeEntity>().Any(x => x.Id == code.Id)) that.Add(code);
+            }
+        }
     }
 }

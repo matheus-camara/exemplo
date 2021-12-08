@@ -1,4 +1,5 @@
 ﻿using Domain.Commands.CalculateEligibility;
+using Domain.Commands.CalculateEligibility.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,9 @@ namespace Api.Controllers
             => _mediator = mediator;
 
         [HttpPost]
-        public async Task<IActionResult> CalculateEligiblityForPro([FromBody] CalculateEligibilityForProCommand command)
+        public async Task<CalculateEligibilityForProCommandResult> CalculateEligiblityForPro([FromBody] CalculateEligibilityForProCommand command)
         {
-            return Ok(await _mediator.Send(command));
+            return await _mediator.Send(command);
         }
     }
 }

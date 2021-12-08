@@ -13,9 +13,8 @@ public static class Migrations
         {
             if (context.Database.IsRelational() && context.Database.CanConnect())
             {
-
                 context.Database.OpenConnection();
-                if (!context.Database.GetAppliedMigrations().Any())
+                if (context.Database.GetPendingMigrations().Any())
                 {
                     context.Database.Migrate();
                     context.ApplySeeds();
