@@ -1,14 +1,11 @@
-using Domain.Entities.Rules.Pros;
-using FluentAssertions;
-using Xunit;
-
 namespace Domain.Tests.Rules;
+
 public class IsUnderAgeRuleTest : BaseTest
 {
     [Fact]
     public async void ShouldInvalidateProWhenUnderAge()
     {
-        var pro = CreatePro(age: 15);
+        var pro = CreatePro(15);
 
         await IsUnderAgeRule.Run(pro);
 
@@ -18,7 +15,7 @@ public class IsUnderAgeRuleTest : BaseTest
     [Fact]
     public async void ShouldNotInvalidateProWhenIsNotUnderAge()
     {
-        var pro = CreatePro(age: 18);
+        var pro = CreatePro(18);
 
         await IsUnderAgeRule.Run(pro);
 

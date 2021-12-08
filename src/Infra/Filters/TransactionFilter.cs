@@ -8,6 +8,7 @@ public class TransactionFilter : IAsyncActionFilter
 {
     private readonly Context _DbContext;
     private readonly INotificationContext _notificationContext;
+
     public TransactionFilter(Context dbContext, INotificationContext notificationContext)
     {
         _DbContext = dbContext;
@@ -20,8 +21,6 @@ public class TransactionFilter : IAsyncActionFilter
     {
         var result = await next();
         if (_notificationContext.IsEmpty || result.Exception == null || result.ExceptionHandled)
-        {
             await _DbContext.SaveChangesAsync();
-        }
     }
 }

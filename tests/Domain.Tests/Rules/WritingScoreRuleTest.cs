@@ -1,9 +1,5 @@
-using Domain.Entities.Pros;
-using Domain.Entities.Rules.Pros;
-using FluentAssertions;
-using Xunit;
-
 namespace Domain.Tests.Rules;
+
 public class WritingScoreRuleTest : BaseTest
 {
     [Fact]

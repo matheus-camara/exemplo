@@ -28,5 +28,3 @@ public class CustomNotificationFilter : ActionFilterAttribute
         }
     }
 }
-
-;

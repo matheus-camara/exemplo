@@ -1,9 +1,8 @@
 using Domain.Repositories;
 
-namespace Domain.Entities.Projects
+namespace Domain.Entities.Projects;
+
+public interface IProjectRepository : IRepository<Project>
 {
-    public interface IProjectRepository : IRepository<Project>
-    {
-        Task<ICollection<Project>> GetCriticalProjectsOrderedByMinimumScore();
-    }
+    Task<ICollection<Project>> GetCriticalProjectsOrderedByMinimumScore();
 }

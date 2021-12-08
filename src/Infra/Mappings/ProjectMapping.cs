@@ -1,6 +1,5 @@
 using Domain.Entities.Projects;
 using Infra.Mappings.Base;
-using Infra.Seeds;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Mappings;

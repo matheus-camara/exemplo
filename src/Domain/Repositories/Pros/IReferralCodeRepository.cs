@@ -1,5 +1,3 @@
-using Domain.Repositories;
-
 namespace Domain.Entities.Pros;
 
 public interface IReferralCodeRepository

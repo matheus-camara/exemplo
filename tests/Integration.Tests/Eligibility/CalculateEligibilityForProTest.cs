@@ -1,15 +1,12 @@
-using FluentAssertions;
-using Infra.Contexts;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using Xunit;
-using Infra.Seeds;
 using Core.Tests.Contexts;
 using Core.Tests.ServiceProvider;
+using FluentAssertions;
+using Infra.Contexts;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Xunit;
 
 namespace Integration.Tests.Eligibility;
 
@@ -21,17 +18,14 @@ internal record ApiResponse(
 
 public class CalculateEligibilityForProTest : IClassFixture<WebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _factory;
     private const string API_URL = "/api/eligibility";
+    private readonly WebApplicationFactory<Program> _factory;
 
     public CalculateEligibilityForProTest(WebApplicationFactory<Program> factory)
     {
         _factory = factory.WithWebHostBuilder(builder =>
         {
-            builder.ConfigureServices(services =>
-            {
-                services.MockDbContext<Context, TestContext>();
-            });
+            builder.ConfigureServices(services => { services.MockDbContext<Context, TestContext>(); });
         });
     }
 
@@ -44,12 +38,13 @@ public class CalculateEligibilityForProTest : IClassFixture<WebApplicationFactor
     }
 
     private async Task<T> GetResult<T>(HttpResponseMessage response)
-        => await JsonSerializer.DeserializeAsync<T>(await response.Content.ReadAsStreamAsync()) ?? default!;
+    {
+        return await JsonSerializer.DeserializeAsync<T>(await response.Content.ReadAsStreamAsync()) ?? default!;
+    }
 
     [Fact]
     public async Task ShouldPostCalculateEligibilityForProAndSucceed()
     {
-
         var input = new
         {
             age = 35,
@@ -75,23 +70,18 @@ public class CalculateEligibilityForProTest : IClassFixture<WebApplicationFactor
             var str = response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
         }
+
         var responseJson = await GetResult<ApiResponse>(response);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         responseJson.score.Should().Be(7
         );
         responseJson.selected_project.Should().Be("Determine if the Schrodinger's cat is alive");
-        responseJson.ineligible_projects.Should().BeEquivalentTo(new string[]
-        {
-            "Calculate the Dark Matter of the universe for Nasa",
-        });
+        responseJson.ineligible_projects.Should().BeEquivalentTo("Calculate the Dark Matter of the universe for Nasa");
 
-        responseJson.eligible_projects.Should().BeEquivalentTo(new string[]
-        {
-            "Determine if the Schrodinger's cat is alive",
+        responseJson.eligible_projects.Should().BeEquivalentTo("Determine if the Schrodinger's cat is alive",
             "Attend to users support for a YXZ Company",
-            "Collect specific people information from their social media for XPTO Company"
-        });
+            "Collect specific people information from their social media for XPTO Company");
     }
 
     [Fact]
@@ -112,12 +102,9 @@ public class CalculateEligibilityForProTest : IClassFixture<WebApplicationFactor
         var responseJson = await GetResult<string[]>(response);
 
         response.StatusCode.Should().Be(HttpStatusCode.UnprocessableEntity);
-        responseJson.Should().BeEquivalentTo(new string[]
-        {
-            "Education Level must be one of 'no_education, high_school, bachelors_or_higher'",
-            "'Writing Score' deve ser informado.",
-            "'Download Speed' deve ser informado.",
-            "'Past Experiences' não pode ser nulo."
-         });
+        responseJson.Should()
+            .BeEquivalentTo("Education Level must be one of 'no_education, high_school, bachelors_or_higher'",
+                "'Writing Score' deve ser informado.", "'Download Speed' deve ser informado.",
+                "'Past Experiences' não pode ser nulo.");
     }
 }

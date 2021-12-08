@@ -1,4 +1,3 @@
-﻿namespace Core.Contexts
-{
-    public record Notification(string Key, string Message);
-}
+﻿namespace Core.Contexts;
+
+public record Notification(string Key, string Message);

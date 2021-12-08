@@ -4,15 +4,14 @@ using Core.Pipelines;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Core.Configuration
+namespace Core.Configuration;
+
+public static class DependancyInjection
 {
-    public static class DependancyInjection
+    public static void AddContexts(this IServiceCollection services)
     {
-        public static void AddContexts(this IServiceCollection services)
-        {
-            services.AddScoped<INotificationContext, NotificationContext>();
-            services.AddScoped<CustomNotificationFilter>();
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        }
+        services.AddScoped<INotificationContext, NotificationContext>();
+        services.AddScoped<CustomNotificationFilter>();
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
     }
 }

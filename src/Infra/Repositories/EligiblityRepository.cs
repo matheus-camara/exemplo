@@ -10,4 +10,3 @@ internal class EligiblityRepository : Repository<Eligibility>, IEligibilityRepos
     {
     }
 }
-

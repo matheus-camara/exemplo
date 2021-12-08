@@ -19,6 +19,7 @@ public static class Migrations
                     context.Database.Migrate();
                     context.ApplySeeds();
                 }
+
                 context.Database.CloseConnection();
             }
         }

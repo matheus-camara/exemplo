@@ -1,4 +1,3 @@
-
 using Core.Entities;
 using Domain.Entities.Pros;
 

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace Infra.Mappings.Base;
+
 internal abstract class TrackableMapping<T> : IEntityTypeConfiguration<T> where T : Trackable
 {
     public virtual void Configure(EntityTypeBuilder<T> builder)
@@ -27,4 +28,3 @@ internal class IdentityGenerator : ValueGenerator<Guid>
         return Guid.NewGuid();
     }
 }
-

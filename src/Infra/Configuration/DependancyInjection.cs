@@ -1,26 +1,24 @@
-﻿using Core.Filters;
-using Domain.Entities.Projects;
+﻿using System.Reflection;
 using Domain.Entities.Pros;
 using Domain.Repositories;
 using Infra.Contexts;
-using Infra.Filters;
 using Infra.Repositories;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace Infra.Configuration;
 
 public static class DependancyInjection
 {
-    public static void AddRepositories(this IServiceCollection services, Assembly[] assemblies, IConfiguration configuration)
+    public static void AddRepositories(this IServiceCollection services, Assembly[] assemblies,
+        IConfiguration configuration)
     {
-        services.AddDbContext<Context>(options => options.UseSqlServer(configuration.GetConnectionString("Main")), ServiceLifetime.Scoped);
+        services.AddDbContext<Context>(options => options.UseSqlServer(configuration.GetConnectionString("Main")));
         services.AddTransient<IReferralCodeRepository, ReferralCodeRepository>();
         services.AddGenericRepositories(assemblies);
     }
+
     private static IEnumerable<Type> GetTypesOfImplementations(Assembly[] assemblies, Type it, Type baseType)
     {
         return assemblies.SelectMany(a => a.DefinedTypes.Where(x =>
@@ -46,4 +44,3 @@ public static class DependancyInjection
         }
     }
 }
-

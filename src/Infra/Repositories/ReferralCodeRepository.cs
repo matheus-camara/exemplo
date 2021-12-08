@@ -3,17 +3,19 @@ using Infra.Contexts;
 using Infra.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infra.Repositories
+namespace Infra.Repositories;
+
+internal class ReferralCodeRepository : IReferralCodeRepository
 {
-    internal class ReferralCodeRepository : IReferralCodeRepository
+    public ReferralCodeRepository(Context context)
     {
-        private Context Context { get; init; }
+        Context = context;
+    }
 
-        public ReferralCodeRepository(Context context)
-        {
-            Context = context;
-        }
+    private Context Context { get; }
 
-        public async Task<bool> ReferralCodeExists(ReferralCode code) => await Context.Set<ReferralCodeEntity>().AnyAsync(x => x.Code == code);
+    public async Task<bool> ReferralCodeExists(ReferralCode code)
+    {
+        return await Context.Set<ReferralCodeEntity>().AnyAsync(x => x.Code == code);
     }
 }

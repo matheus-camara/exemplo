@@ -1,9 +1,6 @@
-using System.Threading.Tasks;
+namespace Domain.Entities.Rules;
 
-namespace Domain.Entities.Rules
+public interface IRule<T>
 {
-    public interface IRule<T>
-    {
-        Task Run(T target);
-    }
+    Task Run(T target);
 }

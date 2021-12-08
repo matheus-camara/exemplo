@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Core.Filters;
+
 public class NoContentFilter : ActionFilterAttribute
 {
     public override void OnActionExecuted(ActionExecutedContext context)
@@ -14,9 +15,11 @@ public class NoContentFilter : ActionFilterAttribute
     }
 
     private bool IsEmptyResult(ActionExecutedContext context)
-    => context is { Result: ObjectResult result }
-            && ((result is { Value: Array array } && array is { Length: 0 })
-            || (result is { Value: IEnumerable enumerable } && Empty(enumerable)));
+    {
+        return context is { Result: ObjectResult result }
+               && (result is { Value: Array array } && array is { Length: 0 }
+                   || result is { Value: IEnumerable enumerable } && Empty(enumerable));
+    }
 
     private bool Empty(IEnumerable enumerable)
     {

@@ -1,16 +1,7 @@
-using Domain.Entities.Pros;
-using Domain.Entities.Rules.Pros;
-using FluentAssertions;
-using Moq;
-using Xunit;
-
 namespace Domain.Tests.Rules;
+
 public class HasReferralCodeRuleTest : BaseTest
 {
-    public HasReferralCodeRuleTest() : base()
-    {
-    }
-
     [Fact]
     public async void ShouldNotIncrementScoreOfProWithoutReferralCode()
     {

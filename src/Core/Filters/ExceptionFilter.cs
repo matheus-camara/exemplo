@@ -1,33 +1,33 @@
 using Core.Contexts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
-namespace Core.Filters
+using Microsoft.Extensions.Logging;
+
+namespace Core.Filters;
+
+public class ExceptionFilter : IExceptionFilter
 {
-    public class ExceptionFilter : IExceptionFilter
+    private static readonly Notification DefaultError = new("Internal Server Error",
+        "Ocorreu um erro inesperado, entre em contato com o administrador");
+
+    private readonly IHostingEnvironment _env;
+
+    private readonly ILogger<ExceptionFilter> _logger;
+
+    public ExceptionFilter(IHostingEnvironment env, ILogger<ExceptionFilter> logger)
     {
+        _env = env;
+        _logger = logger;
+    }
 
-        private readonly IHostingEnvironment _env;
+    public void OnException(ExceptionContext context)
+    {
+        if (!_env.IsProduction()) return;
 
-        private readonly ILogger<ExceptionFilter> _logger;
+        var result = new ObjectResult(DefaultError);
+        result.StatusCode = 500;
 
-        private static readonly Notification DefaultError = new Notification("Internal Server Error", "Ocorreu um erro inesperado, entre em contato com o administrador");
-
-        public ExceptionFilter(IHostingEnvironment env, ILogger<ExceptionFilter> logger)
-        {
-            _env = env;
-            _logger = logger;
-        }
-
-        public void OnException(ExceptionContext context)
-        {
-            if (!_env.IsProduction()) return;
-
-            var result = new ObjectResult(DefaultError);
-            result.StatusCode = 500;
-
-            context.Result = result;
-        }
+        context.Result = result;
     }
 }

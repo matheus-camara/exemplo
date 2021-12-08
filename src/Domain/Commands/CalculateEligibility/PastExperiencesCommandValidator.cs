@@ -1,21 +1,15 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Domain.Commands.CalculateEligibility
+namespace Domain.Commands.CalculateEligibility;
+
+public class PastExperiencesCommandValidator : AbstractValidator<PastExperiencesCommand>
 {
-    public class PastExperiencesCommandValidator : AbstractValidator<PastExperiencesCommand>
+    public PastExperiencesCommandValidator()
     {
-        public PastExperiencesCommandValidator()
-        {
-            RuleFor(x => x.Sales)
-                .NotNull();
+        RuleFor(x => x.Sales)
+            .NotNull();
 
-            RuleFor(x => x.Support)
-                .NotNull();
-        }
+        RuleFor(x => x.Support)
+            .NotNull();
     }
 }

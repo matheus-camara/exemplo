@@ -1,7 +1,5 @@
-using FluentAssertions;
-using Xunit;
-
 namespace Domain.Tests.Rules;
+
 public class PastExperiencesRuleTest : BaseTest
 {
     [Fact]

@@ -1,8 +1,5 @@
-using Domain.Entities.Rules.Pros;
-using FluentAssertions;
-using Xunit;
-
 namespace Domain.Tests.Rules;
+
 public class InternetTestRuleTest : BaseTest
 {
     [Fact]
@@ -23,13 +20,12 @@ public class InternetTestRuleTest : BaseTest
         await InternetTestRule.Run(pro);
 
         pro.Score.Should().Be(-1);
-
     }
 
     [Fact]
     public async void ShouldIncreaseScoreForHighUploadSpeed()
     {
-        var pro = CreatePro(internetTest: CreateInternetTest(10, 55));
+        var pro = CreatePro(internetTest: CreateInternetTest(10));
 
         await InternetTestRule.Run(pro);
         pro.Score.Should().Be(1);

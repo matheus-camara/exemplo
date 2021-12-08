@@ -1,9 +1,5 @@
-using Domain.Entities.Pros;
-using Domain.Entities.Rules.Pros;
-using FluentAssertions;
-using Xunit;
-
 namespace Domain.Tests.Rules;
+
 public class EducationLevelRuleTests : BaseTest
 {
     [Fact]
@@ -19,7 +15,7 @@ public class EducationLevelRuleTests : BaseTest
     [Fact]
     public async void ShouldIncrementScoreForHighSchoolEducationPro()
     {
-        var noEducationPro = CreatePro(default, EducationLevel.HighSchool);
+        var noEducationPro = CreatePro(default);
         await EducationLevelRule.Run(noEducationPro);
         noEducationPro.Score.Should().Be(1);
     }

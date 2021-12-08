@@ -1,8 +1,5 @@
-using Domain.Entities.Pros;
-using FluentAssertions;
-using Xunit;
-
 namespace Domain.Tests.Pros;
+
 public class WritingScoreTests
 {
     [Fact]
